@@ -83,7 +83,12 @@
       text-align: center;
       border-top: 1px solid #ffeeba;
       box-sizing: border-box;
+
+      white-space: normal;      /* <-- allow wrapping */
+      word-wrap: break-word;    /* <-- wrap long words if needed */
+      overflow-wrap: break-word;/* <-- same as above, better compatibility */
     }
+
 
     @keyframes spin {
       0% { transform: rotate(0deg); }
@@ -115,6 +120,7 @@
 
       #disclaimer {
         font-size: 3vw;
+        line-height: 1.4;
       }
     }
   </style>

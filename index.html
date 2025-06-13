@@ -16,31 +16,35 @@
       box-sizing: border-box;
     }
 
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
+/*      padding: 0;
       height: 100%;
-      width: 100%;
+      width: 100%;*/
       font-family: 'Segoe UI', sans-serif;
       background: var(--bg);
       color: var(--text);
-      overflow: hidden;
+/*      overflow: hidden;*/
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
     .app {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      padding: 2rem;
+      align-items: center;
       text-align: center;
-      min-height: 100%; /* Makes sure it fills the screen */
-      box-sizing: border-box;
+/*      min-height: 100%;
+      box-sizing: border-box;*/
+      padding: 2rem;
     }
 
     h1 {
-      font-size: 5vw;
-      margin: 0 0 2rem;
+      font-size: 8vw;
+      margin-bottom: 2rem;
     }
 
     button {
@@ -73,21 +77,18 @@
     }
 
     #disclaimer {
-      position: fixed;
+      position: sticky;
       bottom: 0;
-      width: 100%;
       background: #fff3cd;
       color: #856404;
-      padding: 1rem env(safe-area-inset-right) calc(1rem + env(safe-area-inset-bottom)) env(safe-area-inset-left);
-      font-size: 1vw;
+      padding: 1rem;
+      font-size: 1rem;
       text-align: center;
       border-top: 1px solid #ffeeba;
       box-sizing: border-box;
+      z-index: 10;
+}
 
-      white-space: normal;      /* <-- allow wrapping */
-      word-wrap: break-word;    /* <-- wrap long words if needed */
-      overflow-wrap: break-word;/* <-- same as above, better compatibility */
-    }
 
 
     @keyframes spin {
@@ -124,20 +125,75 @@
       }
     }
 
-    body::after {
-      content: "";
-      position: fixed;
-      bottom: 0;
-      height: env(safe-area-inset-bottom);
+
+    .scribble-container {
+      position: relative;
+      display: inline-block;
+      margin-bottom: -1rem;
+    }
+
+    .scribble-text {
+      font-size: 4vw;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .scribble-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      background: #fff3cd;
-      z-index: -1;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .scribble-overlay svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .scribble-path {
+      stroke: #d00;
+      stroke-width: 5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 500;
+      stroke-dashoffset: 500;
+      animation: scribble 1.2s ease-out forwards;
+      animation-delay: var(--delay, 0.5s);
+    }
+
+    @keyframes scribble {
+      to {
+        stroke-dashoffset: 0;
+      }
     }
 
   </style>
 </head>
 <body>
   <div class="app">
+
+    <div class="scribble-container">
+      <div class="scribble-text">V &amp; V</div>
+      <div class="scribble-overlay">
+        <svg viewBox="0 0 100 30" preserveAspectRatio="none">
+          <path class="scribble-path" d="
+            M0,15
+            L3,8 L6,22 L9,12 L12,24 L15,10
+            L18,18 L21,6 L24,20 L27,7 L30,23
+            L33,9 L36,21 L39,11 L42,25 L45,13
+            L48,19 L51,5 L54,20 L57,8 L60,24
+            L63,10 L66,22 L69,9 L72,23 L75,11
+            L78,20 L81,6 L84,21 L87,7 L90,25
+            L93,10 L96,19 L99,12
+          " />
+        </svg>
+      </div>
+    </div>
+
+
     <h1>V or V?</h1>
     <button onclick="choose()">Click to Decide</button>
     <div id="result"> </div>
@@ -145,11 +201,11 @@
       Verifications: <span id="verificationCount">0</span> |
       Validations: <span id="validationCount">0</span>
     </div>
+    <div id="disclaimer">
+      <strong>Disclaimer:</strong> This tool is not FDA-cleared, CE-marked, ISO 13485 certified, nor reviewed by QA. Use at your own regulatory risk.
+    </div>
   </div>
 
-  <div id="disclaimer">
-    <strong>Disclaimer:</strong> This tool is not FDA-cleared, CE-marked, ISO 13485 certified, nor reviewed by QA. Use at your own regulatory risk.
-  </div>
 
   <script>
     let verificationCount = 0;

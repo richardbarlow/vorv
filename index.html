@@ -19,16 +19,15 @@
     html, body {
       margin: 0;
       padding: 0;
-      height: 100%;
+      min-height: 100%;
       width: 100%;
       font-family: 'Segoe UI', sans-serif;
       background: var(--bg);
       color: var(--text);
-      overflow: hidden;
     }
 
     .app {
-      height: 100%;
+      min-height: calc(100vh - 80px); /* leave space for disclaimer */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -72,15 +71,14 @@
     }
 
     #disclaimer {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
       background: #fff3cd;
       color: #856404;
       padding: 1rem;
       font-size: 1vw;
       text-align: center;
       border-top: 1px solid #ffeeba;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     @keyframes spin {
@@ -96,14 +94,22 @@
       h1 {
         font-size: 8vw;
       }
+
       button {
         font-size: 6vw;
         padding: 1.5rem 2.5rem;
       }
+
       #result {
         font-size: 6vw;
+        height: 6vw;
       }
-      #counts, #disclaimer {
+
+      #counts {
+        font-size: 3.5vw;
+      }
+
+      #disclaimer {
         font-size: 3vw;
       }
     }
@@ -121,7 +127,7 @@
   </div>
 
   <div id="disclaimer">
-    <strong>Disclaimer:</strong> Not FDA-cleared, CE-marked, ISO 13485 certified, nor peer-reviewed by QA. Use at your own regulatory risk.
+    <strong>Disclaimer:</strong> This tool is not FDA-cleared, CE-marked, ISO 13485 certified, nor reviewed by QA. Use at your own regulatory risk.
   </div>
 
   <script>

@@ -78,7 +78,7 @@
       width: 100%;
       background: #fff3cd;
       color: #856404;
-      padding: 1rem;
+      padding: 1rem env(safe-area-inset-right) calc(1rem + env(safe-area-inset-bottom)) env(safe-area-inset-left);
       font-size: 1vw;
       text-align: center;
       border-top: 1px solid #ffeeba;
@@ -123,6 +123,17 @@
         line-height: 1.4;
       }
     }
+
+    body::after {
+      content: "";
+      position: fixed;
+      bottom: 0;
+      height: env(safe-area-inset-bottom);
+      width: 100%;
+      background: #fff3cd;
+      z-index: -1;
+    }
+
   </style>
 </head>
 <body>

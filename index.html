@@ -47,6 +47,21 @@
       margin-bottom: 2rem;
     }
 
+
+   .reveal {
+      opacity: 0;
+      animation-name: fadeInOpacity;
+      animation-timing-function: ease-in;
+      animation-fill-mode: forwards;
+      animation-duration: 2s;
+      animation-delay: 2s;
+    }
+
+    @keyframes fadeInOpacity {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
     button {
       font-size: 3vw;
       padding: 2rem 4rem;
@@ -100,31 +115,6 @@
       animation: spin 1s ease-out;
     }
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 8vw;
-      }
-
-      button {
-        font-size: 6vw;
-        padding: 1.5rem 2.5rem;
-      }
-
-      #result {
-        font-size: 6vw;
-        height: 6vw;
-      }
-
-      #counts {
-        font-size: 3.5vw;
-      }
-
-      #disclaimer {
-        font-size: 3vw;
-        line-height: 1.4;
-      }
-    }
-
 
     .scribble-container {
       position: relative;
@@ -161,12 +151,41 @@
       stroke-dasharray: 500;
       stroke-dashoffset: 500;
       animation: scribble 1.2s ease-out forwards;
-      animation-delay: var(--delay, 0.5s);
+      animation-delay: 0.5s;
     }
 
     @keyframes scribble {
       to {
         stroke-dashoffset: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .scribble-text {
+        font-size: 18vw;
+      }
+
+      h1 {
+        font-size: 23vw;
+      }
+
+      button {
+        font-size: 6vw;
+        padding: 1.5rem 2.5rem;
+      }
+
+      #result {
+        font-size: 6vw;
+        height: 6vw;
+      }
+
+      #counts {
+        font-size: 3.5vw;
+      }
+
+      #disclaimer {
+        font-size: 3vw;
+        line-height: 1.4;
       }
     }
 
@@ -193,7 +212,7 @@
       </div>
     </div>
 
-
+    <div class="reveal">
     <h1>V or V?</h1>
     <button onclick="choose()">Click to Decide</button>
     <div id="result"> </div>
@@ -203,6 +222,7 @@
     </div>
     <div id="disclaimer">
       <strong>Disclaimer:</strong> This tool is not FDA-cleared, CE-marked, ISO 13485 certified, nor reviewed by QA. Use at your own regulatory risk.
+    </div>
     </div>
   </div>
 
